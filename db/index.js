@@ -1,15 +1,11 @@
 const { Pool } = require('pg');
+const { user, host, database, password, port } = require('../credentials/db_configuration');
 
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    password: 'node_password',
-    database: 'monstersdb',
-    port: 5432
-});
+const pool = new Pool({ user, host, database, password, port });
 
-pool.query('SELECT * FROM habitats', (err, res) => {
+pool.query('SELECT * FROM monsters;', (err, res) => {
  if (err) return console.log("Error " + err);
 
- console.log('RESPONSE '+res);
+ let response = JSON.stringify(res, null, 2);
+ console.log('RESPONSE ' + response);
 });
